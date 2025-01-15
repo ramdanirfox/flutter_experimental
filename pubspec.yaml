@@ -10,6 +10,7 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
+  dashbook: ^0.1.16
   flutter:
     sdk: flutter
   flutter_localizations:
