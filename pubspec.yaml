@@ -11,10 +11,13 @@ environment:
 
 dependencies:
   dashbook: ^0.1.16
+  dio: ^5.7.0
+  dropdown_search: ^6.0.2
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:

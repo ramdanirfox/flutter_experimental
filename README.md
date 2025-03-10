@@ -40,5 +40,6 @@ To support additional languages, please visit the tutorial on
 
 - [Folder structure v2](https://medium.com/flutter-community/scalable-folder-structure-for-flutter-applications-183746bdc320)
 - [Folder CLI generator](https://github.com/RyanDsilva/feature_folder_cli)
+- `dart pub global activate mason_cli`
 - Add to path `%USERPROFILE%\AppData\Local\Pub\Cache\bin`
 - `ff generate -n <feature_name> -t <type> -p <path>`
