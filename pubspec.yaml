@@ -10,7 +10,9 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
+  biometric_signature: ^6.1.0
   dashbook: ^0.1.16
+  device_info_plus: ^11.3.0
   dio: ^5.7.0
   dropdown_search: ^6.0.2
   flutter:
@@ -20,6 +22,7 @@ dependencies:
   google_fonts: ^6.2.1
   installed_apps: ^1.5.2
   jailbreak_root_detection: ^1.1.5
+  location: ^8.0.0
   permission_handler: ^11.4.0
   security_plus: ^3.0.1
   vpn_connection_detector: ^1.0.9

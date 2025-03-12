@@ -8,6 +8,8 @@ import 'widgets/custom_dialog.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
+// class MyApp extends FlutterFragmentActivity {}
+
 void main() {
   final dashbook = Dashbook(usePreviewSafeArea: false);
 

@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:biometric_signature/biometric_signature.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:installed_apps/app_info.dart';
 import 'package:installed_apps/installed_apps.dart';
 import 'package:jailbreak_root_detection/jailbreak_root_detection.dart';
+import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:security_plus/security_plus.dart';
 import 'package:vpn_connection_detector/vpn_connection_detector.dart';
@@ -158,6 +161,90 @@ class FraudDialog extends StatelessWidget {
             }
           },
           child: const Text('MockLoc'),
+        ),
+        TextButton(
+          onPressed: () async {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Analyzing Platform')),
+            );
+            final deviceInfoPlugin = DeviceInfoPlugin();
+            final deviceInfo = await deviceInfoPlugin.deviceInfo;
+            final allInfo = deviceInfo.data;
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Details = ${allInfo.toString()}')),
+            );
+          },
+          child: const Text('Platform'),
+        ),
+        TextButton(
+          // Please update MainActivity.kt as follows
+          // import io.flutter.embedding.android.FlutterFragmentActivity
+          // class MainActivity: FlutterFragmentActivity()
+          onPressed: () async {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Checking Biometrics A')),
+            );
+            final biometricSignature = BiometricSignature();
+            final biometrics =
+                await biometricSignature.biometricAuthAvailable();
+            if (!biometrics!.contains("none, ")) {
+              try {
+                final String? publicKey = await biometricSignature.createKeys();
+                final String? signature = await biometricSignature
+                    .createSignature(options: {
+                  "payload": "Payload to sign B",
+                  "promptMessage": "You are Welcome C !"
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                      content: Text(
+                          'Auth Done. methods = $biometrics, sig = $signature, pubKey = $publicKey')),
+                );
+              } on PlatformException catch (e) {
+                debugPrint(e.message);
+                debugPrint(e.code);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                      content: Text(
+                          'Auth Failed. methods = $biometrics, msg = ${e.message}')),
+                );
+              }
+            }
+          },
+          child: const Text('Bio'),
+        ),
+        TextButton(
+          onPressed: () async {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Analyzing Location')),
+            );
+            loc.Location location = new loc.Location();
+            bool _serviceEnabled;
+            loc.PermissionStatus _permissionGranted;
+            loc.LocationData _locationData;
+
+            _serviceEnabled = await location.serviceEnabled();
+            if (!_serviceEnabled) {
+              _serviceEnabled = await location.requestService();
+              if (!_serviceEnabled) {
+                return;
+              }
+            }
+
+            _permissionGranted = await location.hasPermission();
+            if (_permissionGranted == PermissionStatus.denied) {
+              _permissionGranted = await location.requestPermission();
+              if (_permissionGranted != PermissionStatus.granted) {
+                return;
+              }
+            }
+
+            _locationData = await location.getLocation();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Located!\nLng = ${_locationData.longitude}\nLat = ${_locationData.latitude}\nAcc = ${_locationData.accuracy}\nHead = ${_locationData.heading}\nHeadAcc = ${_locationData.headingAccuracy}\n mock = ${_locationData.isMock}')),
+            );
+          },
+          child: const Text('Loc'),
         ),
       ],
     );
