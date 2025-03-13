@@ -5,8 +5,8 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:installed_apps/app_info.dart';
-import 'package:installed_apps/installed_apps.dart';
+import 'package:get_apps/app_info.dart';
+import 'package:get_apps/get_apps.dart';
 import 'package:jailbreak_root_detection/jailbreak_root_detection.dart';
 import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
@@ -30,46 +30,48 @@ class FraudDialog extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('Analysis started!')),
             );
-            List<AppInfo> apps = await InstalledApps.getInstalledApps();
+            List<AppInfo> apps = await GetApps().getApps();
             showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Installed Apps'),
-                  content: Container(
-                    width: double.maxFinite,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: apps.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        AppInfo app = apps[index];
-                        return ListTile(
-                          // leading: Image.memory(app.icon),
-                          //                         app.icon != null
-                          // ? Image.memory(app.icon)
-                          // : Image.asset('default_icon.png'), // or some other default image
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Installed Apps'),
+                content: Container(
+                  width: double.maxFinite,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: apps.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      AppInfo app = apps[index];
+                      return ListTile(
+                        // leading: Image.memory(app.icon),
+                        //                         app.icon != null
+                        // ? Image.memory(app.icon)
+                        // : Image.asset('default_icon.png'), // or some other default image
 
-                          // leading: Image.memory(app.icon!),
-                          // leading: Image.memory(app.icon ?? Uint8List(0)),
-                          leading: Text("app"),
-                          title: Text(app.name),
-                          subtitle: Text(app.packageName),
-                        );
-                      },
-                    ),
+                        // leading: Image.memory(app.icon!),
+                        // leading: Image.memory(app.icon ?? Uint8List(0)),
+                        leading: Text("app"),
+                        title: Text(app.appName),
+                        // title: Text('$index'),
+                        subtitle: Text(app.appPackage),
+                        // subtitle: Text("App"),
+                      );
+                    },
                   ),
-                  actions: [
-                    TextButton(
-                      child: Text('Close'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
-                );
-              },
-            );
-            ScaffoldMessenger.of(context).showSnackBar(
+                ),
+                actions: [
+                  TextButton(
+                    child: Text('Close'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+                      ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('Analysis Done! Apps = ${apps.length}')),
             );
           },

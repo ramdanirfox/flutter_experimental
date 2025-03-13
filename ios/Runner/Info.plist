@@ -6,6 +6,18 @@
 	<string>This app needs access to location when open to verify device security.</string>
 	<key>NSFaceIDUsageDescription</key>
     <string>This app is using FaceID for authentication</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fb</string>
+		<string>twitter</string>
+		<string>instagram</string>
+		<string>whatsapp</string>
+		<string>youtube</string>
+		<string>comgooglemaps</string>
+		<string>http</string>
+		<string>https</string>
+		<string>mailto</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

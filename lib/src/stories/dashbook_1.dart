@@ -5,6 +5,7 @@ import 'package:flutter_experimental/src/features/dropdownsearch_pkg_widget/drop
 
 import '../features/bottombar1/bottombar1_widget.dart';
 import '../features/bottombar2/bottombar2.dart';
+import '../features/face_analysis/face_analysis_widget.dart';
 import '../features/fraud_analysis/fraud_analysis_widget.dart';
 
   /// Adds stories for the widgets in this library to the given [Dashbook].
@@ -38,13 +39,26 @@ import '../features/fraud_analysis/fraud_analysis_widget.dart';
     });
     
     dashbook.storiesOf("Fraud Detection")
-    .add('default', (ctx) {
-      ctx.action('Buka Alert', (context) {
+    .add('detections', (ctx) {
+      ctx.action('Buka Metode Deteksi', (context) {
         showDialog(
           context: context,
           builder: (_) => FraudDialog(),
         );
       });
+      
+
+      // return SizedBox();
+      return ElevatedButton(child: Text('Lihat Info'), onPressed: () {});
+    }, info: "Tekan tombol > di pojok untuk buka aksi", pinInfo: true)
+    .add('face analysis', (ctx) {
+      ctx.action('Buka Analisis', (context) {
+        showDialog(
+          context: context,
+          builder: (_) => FaceAnalysisDialog(),
+        );
+      });
+      
 
       // return SizedBox();
       return ElevatedButton(child: Text('Lihat Info'), onPressed: () {});
