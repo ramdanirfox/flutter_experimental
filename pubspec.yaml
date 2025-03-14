@@ -26,6 +26,8 @@ dependencies:
   google_fonts: ^6.2.1
   jailbreak_root_detection: ^1.1.5
   location: ^8.0.0
+  path: ^1.9.1
+  path_provider: ^2.1.5
   permission_handler: ^11.4.0
   security_plus: ^3.0.1
   vpn_connection_detector: ^1.0.9
@@ -44,4 +46,7 @@ flutter:
 
   assets:
     # Add assets from the images directory to the application.
+    - assets/images/user1.jpg
+    - assets/models/facenet.tflite
     - assets/images/
+    - assets/models/
