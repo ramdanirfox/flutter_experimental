@@ -2,6 +2,7 @@ import 'package:dashbook/dashbook.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_experimental/src/features/appbar/appbar_widget.dart';
 import 'package:flutter_experimental/src/features/dropdownsearch_pkg_widget/dropdownsearch_pkg_widget.dart';
+import 'package:flutter_experimental/src/features/notification/notification_widget.dart';
 
 import '../features/bottombar1/bottombar1_widget.dart';
 import '../features/bottombar2/bottombar2.dart';
@@ -62,6 +63,18 @@ import '../features/fraud_analysis/fraud_analysis_widget.dart';
 
       // return SizedBox();
       return ElevatedButton(child: Text('Lihat Info'), onPressed: () {});
+    }, info: "Tekan tombol > di pojok untuk buka aksi", pinInfo: true); 
+
+    dashbook.storiesOf("Overlay")
+    .add('notification', (ctx) {
+      ctx.action('Buka Notifikasi', (context) {
+        showDialog(
+          context: context,
+          builder: (_) => NotificationOverlay(),
+        );
+      });
+      // return SizedBox();
+      return ElevatedButton(child: Text('Lihat Info'), onPressed: () {});
     }, info: "Tekan tombol > di pojok untuk buka aksi", pinInfo: true);
-    
+      // return SizedBox();
   }

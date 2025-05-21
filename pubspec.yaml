@@ -20,6 +20,7 @@ dependencies:
   face_verify: ^0.0.3
   flutter:
     sdk: flutter
+  flutter_local_notifications: ^19.2.1
   flutter_localizations:
     sdk: flutter
   get_apps: ^1.0.4
